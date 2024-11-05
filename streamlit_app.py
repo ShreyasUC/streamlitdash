@@ -3,149 +3,73 @@ import pandas as pd
 import math
 from pathlib import Path
 
-# Set the title and favicon that appear in the Browser's tab bar.
-st.set_page_config(
-    page_title='GDP dashboard',
-    page_icon=':earth_americas:', # This is an emoji shortcode. Could be a URL too.
-)
-
-# -----------------------------------------------------------------------------
-# Declare some useful functions.
-
 @st.cache_data
-def get_gdp_data():
-    """Grab GDP data from a CSV file.
+# Instead of a CSV on disk, you could read from an HTTP endpoint here too.
+DATA_FILENAME = Path(__file__).parent/'data/base.csv'
+raw_gdp_df = pd.read_csv(DATA_FILENAME)
 
-    This uses caching to avoid having to read the file every time. If we were
-    reading from an HTTP endpoint instead of a file, it's a good idea to set
-    a maximum age to the cache with the TTL argument: @st.cache_data(ttl='1d')
-    """
+# Streamlit app layout
+st.title('Streamlit Dashboard: Revenue Analysis')
 
-    # Instead of a CSV on disk, you could read from an HTTP endpoint here too.
-    DATA_FILENAME = Path(__file__).parent/'data/gdp_data.csv'
-    raw_gdp_df = pd.read_csv(DATA_FILENAME)
+# Sidebar for selecting filters
+st.sidebar.header('Filter Data')
+category_filter = st.sidebar.selectbox('Select Category', df['category'].unique())
+zone_filter = st.sidebar.selectbox('Select Customer Zone', df['cust-zone'].unique())
+platform_filter = st.sidebar.selectbox('Select Platform', df['platform'].unique())
 
-    MIN_YEAR = 1960
-    MAX_YEAR = 2022
-
-    # The data above has columns like:
-    # - Country Name
-    # - Country Code
-    # - [Stuff I don't care about]
-    # - GDP for 1960
-    # - GDP for 1961
-    # - GDP for 1962
-    # - ...
-    # - GDP for 2022
-    #
-    # ...but I want this instead:
-    # - Country Name
-    # - Country Code
-    # - Year
-    # - GDP
-    #
-    # So let's pivot all those year-columns into two: Year and GDP
-    gdp_df = raw_gdp_df.melt(
-        ['Country Code'],
-        [str(x) for x in range(MIN_YEAR, MAX_YEAR + 1)],
-        'Year',
-        'GDP',
-    )
-
-    # Convert years from string to integers
-    gdp_df['Year'] = pd.to_numeric(gdp_df['Year'])
-
-    return gdp_df
-
-gdp_df = get_gdp_data()
-
-# -----------------------------------------------------------------------------
-# Draw the actual page
-
-# Set the title that appears at the top of the page.
-'''
-# :earth_americas: GDP dashboard
-
-Browse GDP data from the [World Bank Open Data](https://data.worldbank.org/) website. As you'll
-notice, the data only goes to 2022 right now, and datapoints for certain years are often missing.
-But it's otherwise a great (and did I mention _free_?) source of data.
-'''
-
-# Add some spacing
-''
-''
-
-min_value = gdp_df['Year'].min()
-max_value = gdp_df['Year'].max()
-
-from_year, to_year = st.slider(
-    'Which years are you interested in?',
-    min_value=min_value,
-    max_value=max_value,
-    value=[min_value, max_value])
-
-countries = gdp_df['Country Code'].unique()
-
-if not len(countries):
-    st.warning("Select at least one country")
-
-selected_countries = st.multiselect(
-    'Which countries would you like to view?',
-    countries,
-    ['DEU', 'FRA', 'GBR', 'BRA', 'MEX', 'JPN'])
-
-''
-''
-''
-
-# Filter the data
-filtered_gdp_df = gdp_df[
-    (gdp_df['Country Code'].isin(selected_countries))
-    & (gdp_df['Year'] <= to_year)
-    & (from_year <= gdp_df['Year'])
+# Apply filters to the DataFrame
+filtered_df = df[
+    (df['category'] == category_filter) &
+    (df['cust-zone'] == zone_filter) &
+    (df['platform'] == platform_filter)
 ]
 
-st.header('GDP over time', divider='gray')
+# Show the filtered data
+st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
+st.write(filtered_df)
 
-''
+# Create a Revenue Plot by Category
+st.subheader('Revenue by Category')
+category_revenue = df.groupby('category')['revenue'].sum().reset_index()
 
-st.line_chart(
-    filtered_gdp_df,
-    x='Year',
-    y='GDP',
-    color='Country Code',
-)
+# Bar chart using Matplotlib
+fig, ax = plt.subplots()
+ax.bar(category_revenue['category'], category_revenue['revenue'], color='skyblue')
+ax.set_title('Total Revenue by Category')
+ax.set_xlabel('Category')
+ax.set_ylabel('Revenue')
 
-''
-''
+st.pyplot(fig)
 
+# Create a Time Series Plot of Revenue over Order Dates
+st.subheader('Revenue Over Time (Order Date)')
+df['order-date'] = pd.to_datetime(df['order-date'])  # Make sure order-date is in datetime format
+time_revenue = df.groupby('order-date')['revenue'].sum().reset_index()
 
-first_year = gdp_df[gdp_df['Year'] == from_year]
-last_year = gdp_df[gdp_df['Year'] == to_year]
+fig, ax = plt.subplots()
+ax.plot(time_revenue['order-date'], time_revenue['revenue'], marker='o', color='green')
+ax.set_title('Revenue Over Time')
+ax.set_xlabel('Order Date')
+ax.set_ylabel('Revenue')
 
-st.header(f'GDP in {to_year}', divider='gray')
+st.pyplot(fig)
 
-''
+# Create a Boxplot of Revenue by Customer Zone
+st.subheader('Revenue Distribution by Customer Zone')
+plt.figure(figsize=(8, 6))
+sns.boxplot(x='cust-zone', y='revenue', data=df, palette='Set2')
+plt.title('Revenue Distribution by Customer Zone')
+plt.xlabel('Customer Zone')
+plt.ylabel('Revenue')
 
-cols = st.columns(4)
+st.pyplot(plt)
 
-for i, country in enumerate(selected_countries):
-    col = cols[i % len(cols)]
+# Interactive Plot using Plotly (Revenue by Platform)
+st.subheader('Revenue by Platform (Interactive)')
+platform_revenue = df.groupby('platform')['revenue'].sum().reset_index()
 
-    with col:
-        first_gdp = first_year[first_year['Country Code'] == country]['GDP'].iat[0] / 1000000000
-        last_gdp = last_year[last_year['Country Code'] == country]['GDP'].iat[0] / 1000000000
+fig = px.bar(platform_revenue, x='platform', y='revenue', title='Revenue by Platform', color='platform')
+st.plotly_chart(fig)
 
-        if math.isnan(first_gdp):
-            growth = 'n/a'
-            delta_color = 'off'
-        else:
-            growth = f'{last_gdp / first_gdp:,.2f}x'
-            delta_color = 'normal'
-
-        st.metric(
-            label=f'{country} GDP',
-            value=f'{last_gdp:,.0f}B',
-            delta=growth,
-            delta_color=delta_color
-        )
+# Optionally, you can also add more graphs based on user input, for example:
+# Create Revenue by SKU, Quantity Sold, or more visualizations.
