@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import math
 from pathlib import Path
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
+
 
 DATA_FILENAME = Path(__file__).parent/'data/base.csv'
 df = pd.read_csv(DATA_FILENAME)
