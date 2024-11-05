@@ -4,7 +4,7 @@ import math
 from pathlib import Path
 
 DATA_FILENAME = Path(__file__).parent/'data/base.csv'
-raw_gdp_df = pd.read_csv(DATA_FILENAME)
+df = pd.read_csv(DATA_FILENAME)
 
 # Streamlit app layout
 st.title('Streamlit Dashboard: Revenue Analysis')
