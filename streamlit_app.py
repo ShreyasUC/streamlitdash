@@ -1,14 +1,18 @@
 import streamlit as st
 import pandas as pd
-import math
-from pathlib import Path
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+from pathlib import Path
 
+# Load the dataset
+DATA_FILENAME = Path(__file__).parent / 'data/base.csv'
 
-DATA_FILENAME = Path(__file__).parent/'data/base.csv'
+# Ensure that the 'order-date' column is parsed as datetime when reading the CSV
 df = pd.read_csv(DATA_FILENAME)
+
+# Convert 'order-date' to datetime format (in case it's not already in datetime format)
+df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce' will turn invalid dates into NaT
 
 # Streamlit app layout
 st.title('Streamlit Dashboard: Revenue Analysis')
@@ -35,34 +39,37 @@ st.subheader('Revenue by Category')
 category_revenue = df.groupby('category')['revenue'].sum().reset_index()
 
 # Bar chart using Matplotlib
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(10, 6))
 ax.bar(category_revenue['category'], category_revenue['revenue'], color='skyblue')
 ax.set_title('Total Revenue by Category')
 ax.set_xlabel('Category')
 ax.set_ylabel('Revenue')
+plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
 
 st.pyplot(fig)
 
 # Create a Time Series Plot of Revenue over Order Dates
 st.subheader('Revenue Over Time (Order Date)')
-df['order-date'] = pd.to_datetime(df['order-date'])  # Make sure order-date is in datetime format
+# Ensure 'order-date' is in datetime format (already done)
 time_revenue = df.groupby('order-date')['revenue'].sum().reset_index()
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(10, 6))
 ax.plot(time_revenue['order-date'], time_revenue['revenue'], marker='o', color='green')
 ax.set_title('Revenue Over Time')
 ax.set_xlabel('Order Date')
 ax.set_ylabel('Revenue')
+plt.xticks(rotation=45)
 
 st.pyplot(fig)
 
 # Create a Boxplot of Revenue by Customer Zone
 st.subheader('Revenue Distribution by Customer Zone')
-plt.figure(figsize=(8, 6))
+plt.figure(figsize=(10, 6))
 sns.boxplot(x='cust-zone', y='revenue', data=df, palette='Set2')
 plt.title('Revenue Distribution by Customer Zone')
 plt.xlabel('Customer Zone')
 plt.ylabel('Revenue')
+plt.xticks(rotation=45)
 
 st.pyplot(plt)
 
@@ -73,5 +80,5 @@ platform_revenue = df.groupby('platform')['revenue'].sum().reset_index()
 fig = px.bar(platform_revenue, x='platform', y='revenue', title='Revenue by Platform', color='platform')
 st.plotly_chart(fig)
 
-# Optionally, you can also add more graphs based on user input, for example:
+# Optionally, you can add more graphs based on user input, such as:
 # Create Revenue by SKU, Quantity Sold, or more visualizations.
