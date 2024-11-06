@@ -19,8 +19,19 @@ df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce'
 st.title('Revenue Dashboard')
 
 st.sidebar.image("uppercase-logo.png", use_column_width=True)
-st.sidebar.title("Business Dashboard")
-st.sidebar.header("⚙️ Settings")
+st.sidebar.title("Business Summary")
+st.sidebar.markdown("""
+    <style>
+        .header-title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #2C3E50;
+            text-align: center;
+        }
+    </style>
+    <div class="header-title">Revenue Dashboard</div>
+""", unsafe_allow_html=True)
+#st.sidebar.header("⚙️ Settings")
 
 
 # # Sidebar for selecting filters
