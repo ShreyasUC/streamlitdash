@@ -96,25 +96,20 @@ aov = total_revenue / distinct_orders if distinct_orders > 0 else 0
 #Calculating data for trend
 
 min_order_date = filtered_df['order-date'].min()
-
-# Step 2: Calculate the first day of the month for the minimum order date
 first_day_current_month = min_order_date.replace(day=1)
-
-# Step 3: Calculate the last day of the last month
 last_day_last_month = first_day_current_month - timedelta(days=1)
-
-# Step 4: Calculate the first day of the last month
 first_day_last_month = last_day_last_month.replace(day=1)
-
-# Step 5: Filter the DataFrame to get data for the last month
 last_month_df = df[(df['order-date'] >= first_day_last_month) & 
                              (df['order-date'] <= last_day_last_month)]
-
-# Step 6: Calculate the total revenue for the last month
 last_month_revenue = last_month_df['revenue'].sum()
+divisor = last_day_last_month.day()
+lm_rev_drr = last_month_revenue/divisor/100000
+revenue_trend = drr_gmv - lm_rev_drr
+rt% = revenue_trend/lm_rev_drr
 
 # Display the last month's revenue
 st.write(f"Revenue for Last Month: ₹{last_month_revenue:,.0f}")
+st.write(f"DRR Trend: ₹{rt%:,.1f}")
 
 # Displaying the data in a card-like format using st.markdown
 
@@ -124,7 +119,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <h3 style="text-align: center; font-size: 18px;">GMV: ₹{tr:,.0f} Lakhs</h3>
+            <h3 style="text-align: center; font-size: 18px;">GMV: ₹{tr:,.1f} Lakhs</h3>
         </div>
     """, unsafe_allow_html=True)
 
@@ -154,7 +149,7 @@ col4, col5, col6 = st.columns(3)
 with col4:
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <h3 style="text-align: center; font-size: 18px;">DRR (GMV): ₹{drr_gmv:,.0f}</h3>
+            <h3 style="text-align: center; font-size: 18px;">DRR (GMV): ₹{drr_gmv:,.1f} Lakhs</h3>
         </div>
     """, unsafe_allow_html=True)
 
