@@ -37,7 +37,7 @@ if platform_filter != 'All':
 st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
 
 # --- Display Total Revenue and Units (Card Style) ---
-total_revenue = filtered_df['revenue'].sum()
+total_revenue = round(filtered_df['revenue'].sum(),0)
 total_units = filtered_df['qty'].sum()
 asp = round(total_revenue/total_units,0)
 
