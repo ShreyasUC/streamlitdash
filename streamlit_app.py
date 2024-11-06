@@ -131,7 +131,7 @@ col1, col2, col3 = st.columns(3)
 
 # Card 1: GMV
 with col1:
-    st.markdown("""
+    st.markdown(f"""
     <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
         <h3 style="text-align: center; font-size: 18px;">GMV: ₹{tr:,.0f} Lakhs</h3>
     </div>
@@ -139,7 +139,7 @@ with col1:
 
 # Card 2: Units
 with col2:
-    st.markdown("""
+    st.markdown(f"""
     <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
         <h3 style="text-align: center; font-size: 18px;">Units: {total_units:,.0f}</h3>
     </div>
@@ -147,7 +147,7 @@ with col2:
 
 # Card 3: ASP
 with col3:
-    st.markdown("""
+    st.markdown(f"""
     <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
         <h3 style="text-align: center; font-size: 18px;">ASP: ₹{asp:,}</h3>
     </div>
@@ -158,7 +158,7 @@ col4, col5, col6 = st.columns(3)
 
 # Card 4: DRR GMV
 with col4:
-    st.markdown("""
+    st.markdown(f"""
     <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
         <h3 style="text-align: center; font-size: 18px;">DRR (GMV): ₹{drr_gmv:,.0f}</h3>
     </div>
@@ -166,7 +166,7 @@ with col4:
 
 # Card 5: DRR Units
 with col5:
-    st.markdown("""
+    st.markdown(f"""
     <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
         <h3 style="text-align: center; font-size: 18px;">DRR (Units): {drr_units:,.0f}</h3>
     </div>
@@ -174,7 +174,7 @@ with col5:
 
 # Card 6: AOV
 with col6:
-    st.markdown("""
+    st.markdown(f"""
     <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
         <h3 style="text-align: center; font-size: 18px;">AOV: ₹{aov:,.0f}</h3>
     </div>
