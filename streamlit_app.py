@@ -17,6 +17,7 @@ df['order-date'] = pd.to_datetime(df['order-date'], format='%d-%m-%Y', errors='c
 #df['order-date'] = df['order-date'].dt.date  # This will convert to just the date part
 
 df['revenue'] = pd.to_numeric(df['revenue'],errors='coerce')
+df['revenue'] = df['revenue'].round(0)
 
 # Streamlit app layout
 st.title('Revenue Dashboard')
@@ -74,7 +75,6 @@ st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}
 #Filtering with date
 aggregated_df = filtered_df.groupby('order-date')[['revenue', 'qty']].sum().reset_index()
 aggregated_df['order-date'] = aggregated_df['order-date'].dt.date  # This will convert to just the date part
-aggregated_df['revenue']=aggregated_df.round(0)
 
 st.write(aggregated_df)
 
