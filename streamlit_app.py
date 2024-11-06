@@ -161,7 +161,7 @@ with col4:
             <h3 style="text-align: center; font-size: 18px;">
                 DRR (GMV): ₹{drr_gmv:,.0f} Lakhs<br>
             <span style="font-size: 16px; color: {arrow_color};">
-                   <br><br> {arrow} {abs(rt):.2f}%
+                    {arrow} {abs(rt):.2f}%
                 </span>
               </h3>  
             </div>
