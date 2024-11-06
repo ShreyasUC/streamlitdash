@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 from pathlib import Path
+from datetime import datetime, timedelta
 
 # Set page config
 st.set_page_config(page_title="Uppercase Business Dashboard", page_icon = "uppercase-logo.png", layout="wide")
@@ -92,40 +93,30 @@ drr_gmv = tr / distinct_order_dates if distinct_order_dates > 0 else 0
 drr_units = total_units / distinct_order_dates if distinct_order_dates > 0 else 0
 aov = total_revenue / distinct_orders if distinct_orders > 0 else 0
 
+#Calculating data for trend
+
+min_order_date = filtered_df['order-date'].min()
+
+# Step 2: Calculate the first day of the month for the minimum order date
+first_day_current_month = min_order_date.replace(day=1)
+
+# Step 3: Calculate the last day of the last month
+last_day_last_month = first_day_current_month - timedelta(days=1)
+
+# Step 4: Calculate the first day of the last month
+first_day_last_month = last_day_last_month.replace(day=1)
+
+# Step 5: Filter the DataFrame to get data for the last month
+last_month_df = filtered_df[(filtered_df['order-date'] >= first_day_last_month) & 
+                             (filtered_df['order-date'] <= last_day_last_month)]
+
+# Step 6: Calculate the total revenue for the last month
+last_month_revenue = last_month_df['revenue'].sum()
+
+# Display the last month's revenue
+st.write(f"Revenue for Last Month: ₹{last_month_revenue:,.0f}")
+
 # Displaying the data in a card-like format using st.markdown
-
-# st.markdown(f"""
-#     <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
-#         <!-- Card 1 -->
-#         <h3 style="text-align: center; font-size: 18px;">GMV: ₹{tr:,.0f} Lakhs</h3>
-#     </div>
-        
-
-#     <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
-#         <!-- Card 2 -->
-#         <h3 style="text-align: center; font-size: 18px;">Units: {total_units:,.0f}</h3>
-#     </div>
-        
-#     <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
-#         <!-- Card 3 -->
-#         <h3 style="text-align: center; font-size: 18px;">ASP: ₹{asp:,}</h3>
-#     </div>
-    
-#     <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
-#         <!-- Card 4 -->
-#             <h3 style="text-align: center; font-size: 18px;">DRR (GMV): ₹{drr_gmv:,.0f}</h3>
-#     </div>
-        
-#     <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
-#         <!-- Card 5 -->
-#             <h3 style="text-align: center; font-size: 18px;">DRR (Units): {drr_units:,.0f}</h3>
-#     </div>
-        
-#     <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
-#         <!-- Card 6 -->
-#            <h3 style="text-align: center; font-size: 18px;">AOV: ₹{aov:,.0f}</h3>
-#     </div>
-# """, unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
 
