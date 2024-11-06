@@ -59,8 +59,9 @@ asp = round(total_revenue/total_units)
 # Displaying the data in a card-like format using st.markdown
 st.markdown(f"""
     <div style="padding: 10px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-        <h3>Total Revenue: ${total_revenue:,.2f}</h3>
+        <h3>Total Revenue: ₹{total_revenue:,.2f}</h3>
         <h3>Total Units Sold: {total_units:,}</h3>
+        <h3>ASP : {asp:,}</h3>        
     </div>
     """, unsafe_allow_html=True)
 
