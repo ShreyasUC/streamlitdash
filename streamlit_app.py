@@ -156,22 +156,38 @@ with col4:
         arrow = "&#x2193;"  # Down arrow (↓)
         arrow_color = "red"  # Red color for negative values
 
-    # Display DRR (GMV) with rt% and the corresponding arrow
+    # Display DRR (GMV) with rt% and the corresponding arrow below it
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">
                 DRR (GMV): ₹{drr_gmv:,.0f} Lakhs
-                <span style="font-size: 14px; color: {arrow_color};">
-                    {arrow} {abs(rt):.2f}%
-                </span>
             </h3>
+            <div style="text-align: center; font-size: 14px; color: {arrow_color};">
+                <div>{arrow}</div>  <!-- Display the arrow -->
+                <div>{abs(rt):.2f}%</div>  <!-- Display the percentage -->
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
+
 # with col4:
+#     # Check if rt% is positive or negative and set the appropriate arrow
+#     if rt >= 0:
+#         arrow = "&#x2191;"  # Up arrow (↑)
+#         arrow_color = "green"  # Green color for positive values
+#     else:
+#         arrow = "&#x2193;"  # Down arrow (↓)
+#         arrow_color = "red"  # Red color for negative values
+
+#     # Display DRR (GMV) with rt% and the corresponding arrow
 #     st.markdown(f"""
 #         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-#             <h3 style="text-align: center; font-size: 18px;">DRR (GMV): ₹{drr_gmv:,.1f} Lakhs</h3>
+#             <h3 style="text-align: center; font-size: 18px;">
+#                 DRR (GMV): ₹{drr_gmv:,.0f} Lakhs
+#                 <span style="font-size: 14px; color: {arrow_color};">
+#                     {arrow} {abs(rt):.2f}%
+#                 </span>
+#             </h3>
 #         </div>
 #     """, unsafe_allow_html=True)
 
