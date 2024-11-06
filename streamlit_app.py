@@ -127,42 +127,58 @@ aov = total_revenue / distinct_orders if distinct_orders > 0 else 0
 #     </div>
 # """, unsafe_allow_html=True)
 
-st.markdown(f"""
-    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 20px;">
-        <!-- Card 1: GMV -->
-        <div style="flex: 1 1 calc(33% - 20px); padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <h3 style="text-align: center; font-size: 18px;">GMV: ₹{tr:,.0f} Lakhs</h3>
-        </div>
+col1, col2, col3 = st.columns(3)
 
-        <!-- Card 2: Units -->
-        <div style="flex: 1 1 calc(33% - 20px); padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <h3 style="text-align: center; font-size: 18px;">Units: {total_units:,.0f}</h3>
-        </div>
-
-        <!-- Card 3: ASP -->
-        <div style="flex: 1 1 calc(33% - 20px); padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <h3 style="text-align: center; font-size: 18px;">ASP: ₹{asp:,}</h3>
-        </div>
+# Card 1: GMV
+with col1:
+    st.markdown("""
+    <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <h3 style="text-align: center; font-size: 18px;">GMV: ₹{tr:,.0f} Lakhs</h3>
     </div>
+    """, unsafe_allow_html=True)
 
-    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 20px;">
-        <!-- Card 4: DRR (GMV) -->
-        <div style="flex: 1 1 calc(33% - 20px); padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <h3 style="text-align: center; font-size: 18px;">DRR (GMV): ₹{drr_gmv:,.0f}</h3>
-        </div>
-
-        <!-- Card 5: DRR (Units) -->
-        <div style="flex: 1 1 calc(33% - 20px); padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <h3 style="text-align: center; font-size: 18px;">DRR (Units): {drr_units:,.0f}</h3>
-        </div>
-
-        <!-- Card 6: AOV -->
-        <div style="flex: 1 1 calc(33% - 20px); padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <h3 style="text-align: center; font-size: 18px;">AOV: ₹{aov:,.0f}</h3>
-        </div>
+# Card 2: Units
+with col2:
+    st.markdown("""
+    <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <h3 style="text-align: center; font-size: 18px;">Units: {total_units:,.0f}</h3>
     </div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
+# Card 3: ASP
+with col3:
+    st.markdown("""
+    <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <h3 style="text-align: center; font-size: 18px;">ASP: ₹{asp:,}</h3>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Create 3 columns for the second row (DRR GMV, DRR Units, AOV)
+col4, col5, col6 = st.columns(3)
+
+# Card 4: DRR GMV
+with col4:
+    st.markdown("""
+    <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <h3 style="text-align: center; font-size: 18px;">DRR (GMV): ₹{drr_gmv:,.0f}</h3>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Card 5: DRR Units
+with col5:
+    st.markdown("""
+    <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <h3 style="text-align: center; font-size: 18px;">DRR (Units): {drr_units:,.0f}</h3>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Card 6: AOV
+with col6:
+    st.markdown("""
+    <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <h3 style="text-align: center; font-size: 18px;">AOV: ₹{aov:,.0f}</h3>
+    </div>
+    """, unsafe_allow_html=True)
 
 
 # st.markdown(f"""
