@@ -7,8 +7,6 @@ from pathlib import Path
 
 # Load the dataset
 DATA_FILENAME = Path(__file__).parent / 'data/base.csv'
-
-# Ensure that the 'order-date' column is parsed as datetime when reading the CSV
 df = pd.read_csv(DATA_FILENAME)
 
 # Convert 'order-date' to datetime format (in case it's not already in datetime format)
@@ -34,9 +32,21 @@ filtered_df = df[
 st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
 st.write(filtered_df)
 
-# Create a Revenue Plot by Category
+# --- Display Total Revenue and Units (Card Style) ---
+total_revenue = filtered_df['revenue'].sum()
+total_units = filtered_df['qty'].sum()
+
+# Displaying the data in a card-like format using st.markdown
+st.markdown(f"""
+    <div style="padding: 10px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <h3>Total Revenue: ${total_revenue:,.2f}</h3>
+        <h3>Total Units Sold: {total_units:,}</h3>
+    </div>
+    """, unsafe_allow_html=True)
+
+# --- Revenue by Category (Bar Chart) ---
 st.subheader('Revenue by Category')
-category_revenue = df.groupby('category')['revenue'].sum().reset_index()
+category_revenue = filtered_df.groupby('category')['revenue'].sum().reset_index()
 
 # Bar chart using Matplotlib
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -48,10 +58,17 @@ plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readabili
 
 st.pyplot(fig)
 
-# Create a Time Series Plot of Revenue over Order Dates
+# --- Revenue Split by Category (Pie Chart) ---
+st.subheader('Revenue Split by Category (Pie Chart)')
+category_revenue_pie = filtered_df.groupby('category')['revenue'].sum().reset_index()
+
+# Pie chart using Plotly
+fig = px.pie(category_revenue_pie, names='category', values='revenue', title='Revenue Split by Category')
+st.plotly_chart(fig)
+
+# --- Revenue Over Time (Line Chart) ---
 st.subheader('Revenue Over Time (Order Date)')
-# Ensure 'order-date' is in datetime format (already done)
-time_revenue = df.groupby('order-date')['revenue'].sum().reset_index()
+time_revenue = filtered_df.groupby('order-date')['revenue'].sum().reset_index()
 
 fig, ax = plt.subplots(figsize=(10, 6))
 ax.plot(time_revenue['order-date'], time_revenue['revenue'], marker='o', color='green')
@@ -62,10 +79,10 @@ plt.xticks(rotation=45)
 
 st.pyplot(fig)
 
-# Create a Boxplot of Revenue by Customer Zone
+# --- Revenue Distribution by Customer Zone (Boxplot) ---
 st.subheader('Revenue Distribution by Customer Zone')
 plt.figure(figsize=(10, 6))
-sns.boxplot(x='cust-zone', y='revenue', data=df, palette='Set2')
+sns.boxplot(x='cust-zone', y='revenue', data=filtered_df, palette='Set2')
 plt.title('Revenue Distribution by Customer Zone')
 plt.xlabel('Customer Zone')
 plt.ylabel('Revenue')
@@ -73,9 +90,9 @@ plt.xticks(rotation=45)
 
 st.pyplot(plt)
 
-# Interactive Plot using Plotly (Revenue by Platform)
+# --- Revenue by Platform (Interactive Bar Chart) ---
 st.subheader('Revenue by Platform (Interactive)')
-platform_revenue = df.groupby('platform')['revenue'].sum().reset_index()
+platform_revenue = filtered_df.groupby('platform')['revenue'].sum().reset_index()
 
 fig = px.bar(platform_revenue, x='platform', y='revenue', title='Revenue by Platform', color='platform')
 st.plotly_chart(fig)
