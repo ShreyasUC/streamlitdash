@@ -36,15 +36,15 @@ st.sidebar.markdown("""
 # # Sidebar for selecting filters
 # st.sidebar.header('Filter Data')
 
-# Add an "All" option for filters in the sidebar
-category_filter = st.sidebar.selectbox('Select Category', ['All'] + list(df['category'].unique()))
-zone_filter = st.sidebar.selectbox('Select Customer Zone', ['All'] + list(df['cust-zone'].unique()))
-platform_filter = st.sidebar.selectbox('Select Platform', ['All'] + list(df['platform'].unique()))
-
 # Add date range filter
 st.sidebar.subheader("Select Date Range")
 start_date = st.sidebar.date_input("Start Date", df['order-date'].min())
 end_date = st.sidebar.date_input("End Date", df['order-date'].max())
+
+# Add an "All" option for filters in the sidebar
+category_filter = st.sidebar.selectbox('Select Category', ['All'] + list(df['category'].unique()))
+zone_filter = st.sidebar.selectbox('Select Customer Zone', ['All'] + list(df['cust-zone'].unique()))
+platform_filter = st.sidebar.selectbox('Select Platform', ['All'] + list(df['platform'].unique()))
 
 # Apply filters to the DataFrame based on selected options
 filtered_df = df.copy()  # Start with the full dataset
@@ -71,7 +71,7 @@ filtered_df = filtered_df[(filtered_df['order-date'] >= pd.to_datetime(start_dat
 
 # --- Display Total Revenue and Units (Card Style) ---
 
-total_revenue = (filtered_df['revenue'].sum())
+total_revenue = filtered_df['revenue'].sum()
 tr = total_revenue/100000
 total_units = filtered_df['qty'].sum()
 asp = round(total_revenue/total_units)
