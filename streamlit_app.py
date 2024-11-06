@@ -13,7 +13,7 @@ df = pd.read_csv(DATA_FILENAME)
 df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce' will turn invalid dates into NaT
 
 # Streamlit app layout
-st.title('Streamlit Dashboard: Revenue Analysis')
+st.title('Revenue Dashboard')
 
 # Sidebar for selecting filters
 st.sidebar.header('Filter Data')
@@ -47,13 +47,14 @@ if platform_filter != 'All':
 filtered_df = filtered_df[(filtered_df['order-date'] >= pd.to_datetime(start_date)) & 
                           (filtered_df['order-date'] <= pd.to_datetime(end_date))]
 
-# Show the filtered data
-st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
-st.write(filtered_df)
+# # Show the filtered data
+# st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
+# st.write(filtered_df)
 
 # --- Display Total Revenue and Units (Card Style) ---
-total_revenue = filtered_df['revenue'].sum()
+total_revenue = round(filtered_df['revenue'].sum())
 total_units = filtered_df['qty'].sum()
+asp = round(total_revenue/total_units)
 
 # Displaying the data in a card-like format using st.markdown
 st.markdown(f"""
@@ -63,19 +64,19 @@ st.markdown(f"""
     </div>
     """, unsafe_allow_html=True)
 
-# --- Revenue by Category (Bar Chart) ---
-st.subheader('Revenue by Category')
-category_revenue = filtered_df.groupby('category')['revenue'].sum().reset_index()
+# # --- Revenue by Category (Bar Chart) ---
+# st.subheader('Revenue by Category')
+# category_revenue = filtered_df.groupby('category')['revenue'].sum().reset_index()
 
-# Bar chart using Matplotlib
-fig, ax = plt.subplots(figsize=(10, 6))
-ax.bar(category_revenue['category'], category_revenue['revenue'], color='skyblue')
-ax.set_title('Total Revenue by Category')
-ax.set_xlabel('Category')
-ax.set_ylabel('Revenue')
-plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
+# # Bar chart using Matplotlib
+# fig, ax = plt.subplots(figsize=(10, 6))
+# ax.bar(category_revenue['category'], category_revenue['revenue'], color='skyblue')
+# ax.set_title('Total Revenue by Category')
+# ax.set_xlabel('Category')
+# ax.set_ylabel('Revenue')
+# plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
 
-st.pyplot(fig)
+# st.pyplot(fig)
 
 # --- Revenue Split by Category (Pie Chart) ---
 st.subheader('Revenue Split by Category (Pie Chart)')
