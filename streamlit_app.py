@@ -13,7 +13,9 @@ DATA_FILENAME = Path(__file__).parent / 'data/base.csv'
 df = pd.read_csv(DATA_FILENAME)
 
 # Convert 'order-date' to datetime format (in case it's not already in datetime format)
-df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce' will turn invalid dates into NaT
+# df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce' will turn invalid dates into NaT
+df['order-date'] = df['order-date'].dt.date  # This will convert to just the date part
+
 df['revenue'] = pd.to_numeric(df['revenue'],errors='coerce')
 
 # Streamlit app layout
@@ -68,7 +70,12 @@ filtered_df = filtered_df[(filtered_df['order-date'] >= pd.to_datetime(start_dat
 
 # Show the filtered data
 st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
-st.write(filtered_df)
+
+#Filtering with date
+aggregated_df = filtered_df.groupby('order-date')[['revenue', 'qty']].sum().reset_index()
+st.write(aggregated_df)
+
+# st.write(filtered_df)
 
 # --- Display Total Revenue and Units (Card Style) ---
 
