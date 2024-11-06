@@ -13,7 +13,7 @@ df = pd.read_csv(DATA_FILENAME)
 df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce' will turn invalid dates into NaT
 
 # Streamlit app layout
-st.title('Streamlit Dashboard: Revenue Analysis')
+st.title('Revenue Dashboard')
 
 # Sidebar for selecting filters
 st.sidebar.header('Filter Data')
