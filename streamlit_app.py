@@ -18,9 +18,9 @@ df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce'
 # Streamlit app layout
 st.title('Revenue Dashboard')
 
+st.sidebar.image("uppercase-logo.png", use_column_width=True)
 st.sidebar.title("Uppercase Business Dashboard")
 st.sidebar.header("⚙️ Settings")
-st.sidebar.image("uppercase-logo.png", use_column_width=True)
 
 
 # # Sidebar for selecting filters
