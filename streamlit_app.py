@@ -100,30 +100,31 @@ st.markdown(f"""
         <h3 style="text-align: center; font-size: 18px;">GMV: ₹{tr:,.0f} Lakhs</h3>
     </div>
         
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
         <!-- Card 2 -->
-        <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
-            <h3 style="text-align: center; font-size: 18px;">Units: {total_units:,.0f}</h3>
-        </div>
+        <h3 style="text-align: center; font-size: 18px;">Units: {total_units:,.0f}</h3>
+    </div>
         
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
         <!-- Card 3 -->
-        <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
-            <h3 style="text-align: center; font-size: 18px;">ASP: ₹{asp:,}</h3>
-        </div>
+        <h3 style="text-align: center; font-size: 18px;">ASP: ₹{asp:,}</h3>
+    </div>
     
     <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
         <!-- Card 4 -->
             <h3 style="text-align: center; font-size: 18px;">DRR (GMV): ₹{drr_gmv:,.0f}</h3>
-        </div>
+    </div>
         
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
         <!-- Card 5 -->
-        <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
             <h3 style="text-align: center; font-size: 18px;">DRR (Units): {drr_units:,.0f}</h3>
-        </div>
+    </div>
         
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
         <!-- Card 6 -->
-        <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;">
-            <h3 style="text-align: center; font-size: 18px;">AOV: ₹{aov:,.0f}</h3>
-        </div>
+           <h3 style="text-align: center; font-size: 18px;">AOV: ₹{aov:,.0f}</h3>
+    </div>
 """, unsafe_allow_html=True)
 
 
