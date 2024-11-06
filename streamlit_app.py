@@ -20,7 +20,7 @@ st.title('Revenue Dashboard')
 
 st.sidebar.title("Uppercase Business Dashboard")
 st.sidebar.header("⚙️ Settings")
-st.image("uppercase-logo.png", use_column_width=True)
+st.sidebar.image("uppercase-logo.png", use_column_width=True)
 
 
 # # Sidebar for selecting filters
