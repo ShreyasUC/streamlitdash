@@ -184,11 +184,11 @@ with col4:
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">
                 DRR (GMV): ₹{drr_gmv:,.0f} Lakhs
-            </h3>
-            <span style="display: block; text-align: center; font-size: 14px; color: {arrow_color};">
-                {arrow} <span style="display: block;">{abs(rt):.2f}%</span>
-            </span>
-        </div>
+            <span style="font-size: 15px; color: {arrow_color};">
+                    {arrow}{abs(rt):.2f}%
+                </span>
+              </h3>  
+            </div>
     """, unsafe_allow_html=True)
 
 # Card 5 (DRR Units)
