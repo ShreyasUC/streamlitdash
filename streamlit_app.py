@@ -98,7 +98,7 @@ st.markdown(f"""
     <div style="display: flex; justify-content: space-between; padding: 20px;">
         <!-- Card 1 -->
         <div style="flex: 1; padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); margin-right: 20px;">
-            <h3 style="text-align: center; font-size: 18px;">GMV: ₹{tr:,.0f} Lakhs</h3>
+            <h6 style="text-align: center; font-size: 18px;">GMV: ₹{tr:,.0f} Lakhs</h6>
         </div>
         
         <!-- Card 2 -->
