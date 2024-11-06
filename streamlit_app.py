@@ -74,6 +74,7 @@ st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}
 #Filtering with date
 aggregated_df = filtered_df.groupby('order-date')[['revenue', 'qty']].sum().reset_index()
 aggregated_df['order-date'] = aggregated_df['order-date'].dt.date  # This will convert to just the date part
+aggregated_df['revenue']=aggregated_df.round(0)
 
 st.write(aggregated_df)
 
