@@ -70,11 +70,14 @@ filtered_df = filtered_df[(filtered_df['order-date'] >= pd.to_datetime(start_dat
 # st.write(filtered_df)
 
 # --- Display Total Revenue and Units (Card Style) ---
-total_revenue = filtered_df['revenue'].sum()/10^5
+total_revenue = (filtered_df['revenue'].sum())/100000
 total_units = filtered_df['qty'].sum()
 asp = round(total_revenue/total_units)
 distinct_order_dates = df['order-date'].nunique()
+distinct_orders = df['order-no'].nunique()
 drr_gmv = total_revenue / distinct_order_dates if distinct_order_dates > 0 else 0
+drr_units = total_units / distinct_order_dates if distinct_order_dates > 0 else 0
+aov = total_revenue / distinct_orders if distinct_orders > 0 else 0
 
 # Displaying the data in a card-like format using st.markdown
 st.markdown(f"""
@@ -82,7 +85,9 @@ st.markdown(f"""
         <h3>GMV : {total_revenue:,.2f} lakhs</h3>
         <h3>Units: {total_units:,}</h3>
         <h3>ASP : {asp:,}</h3>
-        <h3> DRR (GMV) : {drr_gmv:,},]</h3>
+        <h3> DRR (GMV) : {drr_gmv:,}</h3>
+        <h3> DRR (Units) : {drr_units:,}</h3>
+        <h3> AOV : {aov:,}</h3>
     </div>
     """, unsafe_allow_html=True)
 
