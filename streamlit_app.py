@@ -19,7 +19,7 @@ df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce'
 st.title('Revenue Dashboard')
 
 st.sidebar.image("uppercase-logo.png", use_column_width=True)
-st.sidebar.title("Uppercase Business Dashboard")
+st.sidebar.title("Business Dashboard")
 st.sidebar.header("⚙️ Settings")
 
 
