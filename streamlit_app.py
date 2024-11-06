@@ -107,8 +107,8 @@ last_day_last_month = first_day_current_month - timedelta(days=1)
 first_day_last_month = last_day_last_month.replace(day=1)
 
 # Step 5: Filter the DataFrame to get data for the last month
-last_month_df = filtered_df[(filtered_df['order-date'] >= first_day_last_month) & 
-                             (filtered_df['order-date'] <= last_day_last_month)]
+last_month_df = df[(df['order-date'] >= first_day_last_month) & 
+                             (df['order-date'] <= last_day_last_month)]
 
 # Step 6: Calculate the total revenue for the last month
 last_month_revenue = last_month_df['revenue'].sum()
