@@ -88,7 +88,7 @@ total_units = filtered_df['qty'].sum()
 asp = round(total_revenue/total_units)
 distinct_order_dates = filtered_df['order-date'].nunique()
 distinct_orders = filtered_df['order-no'].nunique()
-drr_gmv = total_revenue / distinct_order_dates if distinct_order_dates > 0 else 0
+drr_gmv = tr / distinct_order_dates if distinct_order_dates > 0 else 0
 drr_units = total_units / distinct_order_dates if distinct_order_dates > 0 else 0
 aov = total_revenue / distinct_orders if distinct_orders > 0 else 0
 
