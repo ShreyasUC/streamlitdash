@@ -39,7 +39,7 @@ st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}
 # --- Display Total Revenue and Units (Card Style) ---
 total_revenue = filtered_df['revenue'].sum()
 total_units = filtered_df['qty'].sum()
-asp = total_revenue/total_units
+asp = round(total_revenue/total_units,0)
 
 # Displaying the data in a card-like format using st.markdown
 st.markdown(f"""
