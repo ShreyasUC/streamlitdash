@@ -6,7 +6,7 @@ import plotly.express as px
 from pathlib import Path
 
 # Set page config
-st.set_page_config(page_title="Acefour Business Dashboard", layout="wide")
+st.set_page_config(page_title="Uppercase Business Dashboard", page_icon = "uppercase-logo.png", layout="wide")
 
 # Load the dataset
 DATA_FILENAME = Path(__file__).parent / 'data/base.csv'
@@ -18,8 +18,10 @@ df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce'
 # Streamlit app layout
 st.title('Revenue Dashboard')
 
-st.sidebar.title("YouTube Channel Dashboard")
+st.sidebar.title("Uppercase Business Dashboard")
 st.sidebar.header("⚙️ Settings")
+st.image("uppercase-logo.png", use_column_width=True)
+
 
 # # Sidebar for selecting filters
 # st.sidebar.header('Filter Data')
