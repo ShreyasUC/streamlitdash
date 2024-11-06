@@ -102,7 +102,7 @@ first_day_last_month = last_day_last_month.replace(day=1)
 last_month_df = df[(df['order-date'] >= first_day_last_month) & 
                              (df['order-date'] <= last_day_last_month)]
 last_month_revenue = last_month_df['revenue'].sum()
-divisor = last_day_last_month.day()
+divisor = last_day_last_month.day
 lm_rev_drr = last_month_revenue/divisor/100000
 revenue_trend = drr_gmv - lm_rev_drr
 rt = revenue_trend/lm_rev_drr
@@ -146,12 +146,34 @@ st.write("")  # You can also use `st.markdown("<br>", unsafe_allow_html=True)` f
 col4, col5, col6 = st.columns(3)
 
 # Card 4 (DRR GMV)
+
 with col4:
+    # Check if rt% is positive or negative and set the appropriate arrow
+    if rt_percent >= 0:
+        arrow = "&#x2191;"  # Up arrow (↑)
+        arrow_color = "green"  # Green color for positive values
+    else:
+        arrow = "&#x2193;"  # Down arrow (↓)
+        arrow_color = "red"  # Red color for negative values
+
+    # Display DRR (GMV) with rt% and the corresponding arrow
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <h3 style="text-align: center; font-size: 18px;">DRR (GMV): ₹{drr_gmv:,.1f} Lakhs</h3>
+            <h3 style="text-align: center; font-size: 18px;">
+                DRR (GMV): ₹{drr_gmv:,.0f} 
+                <span style="font-size: 14px; color: {arrow_color};">
+                    {arrow} {abs(rt_percent):.2f}%
+                </span>
+            </h3>
         </div>
     """, unsafe_allow_html=True)
+
+# with col4:
+#     st.markdown(f"""
+#         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+#             <h3 style="text-align: center; font-size: 18px;">DRR (GMV): ₹{drr_gmv:,.1f} Lakhs</h3>
+#         </div>
+#     """, unsafe_allow_html=True)
 
 # Card 5 (DRR Units)
 with col5:
