@@ -35,33 +35,34 @@ if platform_filter != 'All':
 
 # Show the filtered data
 st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
-st.write(filtered_df)
 
 # --- Display Total Revenue and Units (Card Style) ---
 total_revenue = filtered_df['revenue'].sum()
 total_units = filtered_df['qty'].sum()
+asp = total_revenue/total_units
 
 # Displaying the data in a card-like format using st.markdown
 st.markdown(f"""
     <div style="padding: 10px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-        <h3>Total Revenue: ${total_revenue:,.2f}</h3>
+        <h3>Total Revenue: ₹{total_revenue:,.2f}</h3>
         <h3>Total Units Sold: {total_units:,}</h3>
+        <h3>ASP: {asp:,}</h3>
     </div>
     """, unsafe_allow_html=True)
 
-# --- Revenue by Category (Bar Chart) ---
-st.subheader('Revenue by Category')
-category_revenue = filtered_df.groupby('category')['revenue'].sum().reset_index()
+# # --- Revenue by Category (Bar Chart) ---
+# st.subheader('Revenue by Category')
+# category_revenue = filtered_df.groupby('category')['revenue'].sum().reset_index()
 
-# Bar chart using Matplotlib
-fig, ax = plt.subplots(figsize=(10, 6))
-ax.bar(category_revenue['category'], category_revenue['revenue'], color='skyblue')
-ax.set_title('Total Revenue by Category')
-ax.set_xlabel('Category')
-ax.set_ylabel('Revenue')
-plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
+# # Bar chart using Matplotlib
+# fig, ax = plt.subplots(figsize=(10, 6))
+# ax.bar(category_revenue['category'], category_revenue['revenue'], color='skyblue')
+# ax.set_title('Total Revenue by Category')
+# ax.set_xlabel('Category')
+# ax.set_ylabel('Revenue')
+# plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
 
-st.pyplot(fig)
+# st.pyplot(fig)
 
 # --- Revenue Split by Category (Pie Chart) ---
 st.subheader('Revenue Split by Category (Pie Chart)')
