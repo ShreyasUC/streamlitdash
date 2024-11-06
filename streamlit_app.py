@@ -19,7 +19,6 @@ df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce'
 st.title('Revenue Dashboard')
 
 st.sidebar.image("uppercase-logo.png", use_column_width=True)
-st.sidebar.title("Business Summary")
 st.sidebar.markdown("""
     <style>
         .header-title {
@@ -29,7 +28,7 @@ st.sidebar.markdown("""
             text-align: center;
         }
     </style>
-    <div class="header-title">Revenue Dashboard</div>
+    <div class="header-title">Business Summary</div>
 """, unsafe_allow_html=True)
 #st.sidebar.header("⚙️ Settings")
 
@@ -71,16 +70,19 @@ filtered_df = filtered_df[(filtered_df['order-date'] >= pd.to_datetime(start_dat
 # st.write(filtered_df)
 
 # --- Display Total Revenue and Units (Card Style) ---
-total_revenue = round(filtered_df['revenue'].sum())
+total_revenue = filtered_df['revenue'].sum()/10^5
 total_units = filtered_df['qty'].sum()
 asp = round(total_revenue/total_units)
+distinct_order_dates = df['order-date'].nunique()
+drr_gmv = total_revenue / distinct_order_dates if distinct_order_dates > 0 else 0
 
 # Displaying the data in a card-like format using st.markdown
 st.markdown(f"""
     <div style="padding: 10px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-        <h3>Total Revenue: ₹{total_revenue:,.2f}</h3>
-        <h3>Total Units Sold: {total_units:,}</h3>
-        <h3>ASP : {asp:,}</h3>        
+        <h3>GMV : {total_revenue:,.2f} lakhs</h3>
+        <h3>Units: {total_units:,}</h3>
+        <h3>ASP : {asp:,}</h3>
+        <h3> DRR (GMV) : {drr_gmv:,},]</h3>
     </div>
     """, unsafe_allow_html=True)
 
