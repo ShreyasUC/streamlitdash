@@ -93,16 +93,54 @@ drr_units = total_units / distinct_order_dates if distinct_order_dates > 0 else 
 aov = total_revenue / distinct_orders if distinct_orders > 0 else 0
 
 # Displaying the data in a card-like format using st.markdown
+
 st.markdown(f"""
-    <div style="padding: 10px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-        <h3>GMV : {tr:,.0f} lakhs</h3>
-        <h3>Units: {total_units:,.0f}</h3>
-        <h3>ASP : {asp:,}</h3>
-        <h3> DRR (GMV) : {drr_gmv:,.0f}</h3>
-        <h3> DRR (Units) : {drr_units:,.0f}</h3>
-        <h3> AOV : {aov:,.0f}</h3>
+    <div style="display: flex; justify-content: space-between; gap: 20px; padding: 20px;">
+        <!-- Card 1 -->
+        <div style="flex: 1; padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="text-align: center;">GMV: ₹{tr:,.0f} Lakhs</h3>
+        </div>
+        
+        <!-- Card 2 -->
+        <div style="flex: 1; padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="text-align: center;">Units: {total_units:,.0f}</h3>
+        </div>
+        
+        <!-- Card 3 -->
+        <div style="flex: 1; padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="text-align: center;">ASP: ₹{asp:,}</h3>
+        </div>
     </div>
-    """, unsafe_allow_html=True)
+    
+    <div style="display: flex; justify-content: space-between; gap: 20px; padding: 20px;">
+        <!-- Card 4 -->
+        <div style="flex: 1; padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="text-align: center;">DRR (GMV): ₹{drr_gmv:,.0f}</h3>
+        </div>
+        
+        <!-- Card 5 -->
+        <div style="flex: 1; padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="text-align: center;">DRR (Units): {drr_units:,.0f}</h3>
+        </div>
+        
+        <!-- Card 6 -->
+        <div style="flex: 1; padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3 style="text-align: center;">AOV: ₹{aov:,.0f}</h3>
+        </div>
+    </div>
+""", unsafe_allow_html=True)
+
+
+# st.markdown(f"""
+#     <div style="padding: 10px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+#         <h3>GMV : {tr:,.0f} lakhs</h3>
+#         <h3>Units: {total_units:,.0f}</h3>
+#         <h3>ASP : {asp:,}</h3>
+#         <h3> DRR (GMV) : {drr_gmv:,.0f}</h3>
+#         <h3> DRR (Units) : {drr_units:,.0f}</h3>
+#         <h3> AOV : {aov:,.0f}</h3>
+#     </div>
+#     """, unsafe_allow_html=True)
 
 # # --- Revenue by Category (Bar Chart) ---
 # st.subheader('Revenue by Category')
