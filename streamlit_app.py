@@ -17,16 +17,21 @@ st.title('Streamlit Dashboard: Revenue Analysis')
 
 # Sidebar for selecting filters
 st.sidebar.header('Filter Data')
-category_filter = st.sidebar.selectbox('Select Category', df['category'].unique())
-zone_filter = st.sidebar.selectbox('Select Customer Zone', df['cust-zone'].unique())
-platform_filter = st.sidebar.selectbox('Select Platform', df['platform'].unique())
 
-# Apply filters to the DataFrame
-filtered_df = df[
-    (df['category'] == category_filter) &
-    (df['cust-zone'] == zone_filter) &
-    (df['platform'] == platform_filter)
-]
+# Add an "All" option for filters in the sidebar
+category_filter = st.sidebar.selectbox('Select Category', ['All'] + list(df['category'].unique()))
+zone_filter = st.sidebar.selectbox('Select Customer Zone', ['All'] + list(df['cust-zone'].unique()))
+platform_filter = st.sidebar.selectbox('Select Platform', ['All'] + list(df['platform'].unique()))
+
+# Apply filters to the DataFrame based on selected options
+filtered_df = df.copy()  # Start with the full dataset
+
+if category_filter != 'All':
+    filtered_df = filtered_df[filtered_df['category'] == category_filter]
+if zone_filter != 'All':
+    filtered_df = filtered_df[filtered_df['cust-zone'] == zone_filter]
+if platform_filter != 'All':
+    filtered_df = filtered_df[filtered_df['platform'] == platform_filter]
 
 # Show the filtered data
 st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
