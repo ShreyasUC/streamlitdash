@@ -5,6 +5,9 @@ import seaborn as sns
 import plotly.express as px
 from pathlib import Path
 
+# Set page config
+st.set_page_config(page_title="Acefour Business Dashboard", layout="wide")
+
 # Load the dataset
 DATA_FILENAME = Path(__file__).parent / 'data/base.csv'
 df = pd.read_csv(DATA_FILENAME)
@@ -15,8 +18,11 @@ df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce'
 # Streamlit app layout
 st.title('Revenue Dashboard')
 
-# Sidebar for selecting filters
-st.sidebar.header('Filter Data')
+st.sidebar.title("YouTube Channel Dashboard")
+st.sidebar.header("⚙️ Settings")
+
+# # Sidebar for selecting filters
+# st.sidebar.header('Filter Data')
 
 # Add an "All" option for filters in the sidebar
 category_filter = st.sidebar.selectbox('Select Category', ['All'] + list(df['category'].unique()))
