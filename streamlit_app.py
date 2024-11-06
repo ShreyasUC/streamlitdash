@@ -14,6 +14,7 @@ df = pd.read_csv(DATA_FILENAME)
 
 # Convert 'order-date' to datetime format (in case it's not already in datetime format)
 df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce' will turn invalid dates into NaT
+df['revenue'] = pd.to_
 
 # Streamlit app layout
 st.title('Revenue Dashboard')
@@ -65,9 +66,9 @@ if platform_filter != 'All':
 filtered_df = filtered_df[(filtered_df['order-date'] >= pd.to_datetime(start_date)) & 
                           (filtered_df['order-date'] <= pd.to_datetime(end_date))]
 
-# # Show the filtered data
-# st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
-# st.write(filtered_df)
+# Show the filtered data
+st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
+st.write(filtered_df)
 
 # --- Display Total Revenue and Units (Card Style) ---
 
@@ -84,12 +85,12 @@ aov = total_revenue / distinct_orders if distinct_orders > 0 else 0
 # Displaying the data in a card-like format using st.markdown
 st.markdown(f"""
     <div style="padding: 10px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-        <h3>GMV : {tr:,.2f} lakhs</h3>
-        <h3>Units: {total_units:,}</h3>
+        <h3>GMV : {tr:,.0f} lakhs</h3>
+        <h3>Units: {total_units:,.0f}</h3>
         <h3>ASP : {asp:,}</h3>
-        <h3> DRR (GMV) : {drr_gmv:,}</h3>
-        <h3> DRR (Units) : {drr_units:,}</h3>
-        <h3> AOV : {aov:,}</h3>
+        <h3> DRR (GMV) : {drr_gmv:,.0f}</h3>
+        <h3> DRR (Units) : {drr_units:,.0f}</h3>
+        <h3> AOV : {aov:,.0f}</h3>
     </div>
     """, unsafe_allow_html=True)
 
