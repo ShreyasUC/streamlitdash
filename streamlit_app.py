@@ -149,7 +149,7 @@ col4, col5, col6 = st.columns(3)
 
 with col4:
     # Check if rt% is positive or negative and set the appropriate arrow
-    if rt_percent >= 0:
+    if rt >= 0:
         arrow = "&#x2191;"  # Up arrow (↑)
         arrow_color = "green"  # Green color for positive values
     else:
@@ -162,7 +162,7 @@ with col4:
             <h3 style="text-align: center; font-size: 18px;">
                 DRR (GMV): ₹{drr_gmv:,.0f} 
                 <span style="font-size: 14px; color: {arrow_color};">
-                    {arrow} {abs(rt_percent):.2f}%
+                    {arrow} {abs(rt):.2f}%
                 </span>
             </h3>
         </div>
