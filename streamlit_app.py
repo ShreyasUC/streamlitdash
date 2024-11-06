@@ -65,8 +65,8 @@ if platform_filter != 'All':
     filtered_df = filtered_df[filtered_df['platform'] == platform_filter]
 
 # Filter by Date Range
-filtered_df = filtered_df[(filtered_df['order-date'] >= (start_date)) & 
-                          (filtered_df['order-date'] <= (end_date))]
+filtered_df = filtered_df[(filtered_df['order-date'] >= (start_date).dt.date) & 
+                          (filtered_df['order-date'] <= (end_date).dt.date)]
 
 # Show the filtered data
 st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
