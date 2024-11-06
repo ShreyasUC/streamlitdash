@@ -129,34 +129,34 @@ aov = total_revenue / distinct_orders if distinct_orders > 0 else 0
 
 st.markdown(f"""
     <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 20px;">
-        <!-- Card 1 -->
+        <!-- Card 1: GMV -->
         <div style="flex: 1 1 calc(33% - 20px); padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">GMV: ₹{tr:,.0f} Lakhs</h3>
         </div>
 
-        <!-- Card 2 -->
+        <!-- Card 2: Units -->
         <div style="flex: 1 1 calc(33% - 20px); padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">Units: {total_units:,.0f}</h3>
         </div>
 
-        <!-- Card 3 -->
+        <!-- Card 3: ASP -->
         <div style="flex: 1 1 calc(33% - 20px); padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">ASP: ₹{asp:,}</h3>
         </div>
     </div>
 
     <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 20px;">
-        <!-- Card 4 -->
+        <!-- Card 4: DRR (GMV) -->
         <div style="flex: 1 1 calc(33% - 20px); padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">DRR (GMV): ₹{drr_gmv:,.0f}</h3>
         </div>
 
-        <!-- Card 5 -->
+        <!-- Card 5: DRR (Units) -->
         <div style="flex: 1 1 calc(33% - 20px); padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">DRR (Units): {drr_units:,.0f}</h3>
         </div>
 
-        <!-- Card 6 -->
+        <!-- Card 6: AOV -->
         <div style="flex: 1 1 calc(33% - 20px); padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">AOV: ₹{aov:,.0f}</h3>
         </div>
