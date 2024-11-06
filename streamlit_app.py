@@ -14,7 +14,7 @@ df = pd.read_csv(DATA_FILENAME)
 
 # Convert 'order-date' to datetime format (in case it's not already in datetime format)
 df['order-date'] = pd.to_datetime(df['order-date'], errors='coerce')  # 'coerce' will turn invalid dates into NaT
-df['revenue'] = pd.to_numberic(df['revenue'],errors='coerce')
+df['revenue'] = pd.to_numeric(df['revenue'],errors='coerce')
 
 # Streamlit app layout
 st.title('Revenue Dashboard')
