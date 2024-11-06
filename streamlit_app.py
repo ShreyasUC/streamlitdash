@@ -183,7 +183,8 @@ with col4:
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">
-                DRR (GMV): ₹{drr_gmv:,.0f} Lakhs
+                DRR (GMV): ₹{drr_gmv:,.0f} 
+                <h5> Lakhs </h5>
                 <span style="font-size: 13px; color: {arrow_color};">
                     {arrow} {abs(rt):.2f}%
                 </span>
