@@ -308,7 +308,7 @@ aggregated_df['ASP'] = round(aggregated_df['revenue']/aggregated_df['qty'])
 aggregated_df = aggregated_df.sort_values(by='order-date', ascending=False)
 
 
-st.write(aggregated_df(index=False))
+st.write(aggregated_df.to_string(index=False))
 
 # # --- Revenue by Category (Bar Chart) ---
 # st.subheader('Revenue by Category')
