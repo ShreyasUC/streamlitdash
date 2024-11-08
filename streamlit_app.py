@@ -95,8 +95,8 @@ min_order_date = filtered_df['order-date'].min()
 first_day_current_month = min_order_date.replace(day=1)
 last_day_last_month = first_day_current_month - timedelta(days=1)
 first_day_last_month = last_day_last_month.replace(day=1)
-last_month_df = df[(df['order-date'] >= first_day_last_month) & 
-                             (df['order-date'] <= last_day_last_month)]
+last_month_df = filtered_df[(filtered_df['order-date'] >= first_day_last_month) & 
+                             (filtered_df['order-date'] <= last_day_last_month)]
 lm_orders = last_month_df['order-no'].nunique()
 last_month_revenue = last_month_df['revenue'].sum()
 lmr_lakhs = last_month_revenue/100000
@@ -159,7 +159,7 @@ with col4:
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">
-                DRR (Sales): ₹{drr_gmv:,.0f} Lakhs<br>
+                DRR (Sales) : ₹{drr_gmv:,.0f} Lakhs<br>
             <span style="font-size: 16px; color: {arrow_color};">
                     {arrow} {abs(rt):.2f}%
                 </span>
@@ -180,7 +180,7 @@ with col5:
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">
-                DRR (Units): ₹{drr_units:,.0f}<br>
+                DRR (Units) : {drr_units:,.0f}<br>
             <span style="font-size: 16px; color: {arrow_color};">
                     {arrow} {abs(ut):.2f}%
                 </span>
@@ -201,7 +201,7 @@ with col6:
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">
-                AOV: ₹{aov:,.0f}<br>
+                AOV : ₹{aov:,.0f}<br>
             <span style="font-size: 16px; color: {arrow_color};">
                     {arrow} {abs(aovt):.2f}%
                 </span>
@@ -223,25 +223,25 @@ col11, col12, col13 = st.columns(3)
 
 # Display different elements in each column
 with col11:
-    st.write(f"Sales: ₹{lmr_lakhs:,.0f} Lakhs")
+    st.write(f"Sales : ₹{lmr_lakhs:,.0f} Lakhs")
     
 with col12:
-    st.write(f"Units:{last_month_units}")
+    st.write(f"Units : {last_month_units}")
     
 with col13:
-    st.write(f"ASP:{last_month_asp}")
+    st.write(f"ASP : ₹{last_month_asp}")
 
 col21, col22, col23 = st.columns(3)
 
 # Display different elements in each column
 with col21:
-    st.write(f"Revenue DRR: ₹{lm_rev_drr:,.0f} Lakhs")
+    st.write(f"DRR (Sales) : ₹{lm_rev_drr:,.0f} Lakhs")
     
 with col22:
-    st.write(f"Units DRR:{lm_units_drr}")
+    st.write(f"DRR (Units) : {lm_units_drr}")
     
 with col23:
-    st.write(f"AOV:{last_month_aov}")
+    st.write(f"AOV : ₹{last_month_aov}")
 
 
 #Filtering with date
