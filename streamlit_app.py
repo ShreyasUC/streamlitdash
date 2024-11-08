@@ -119,7 +119,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <h3 style="text-align: center; font-size: 18px;">GMV: ₹{tr:,.1f} Lakhs</h3>
+            <h3 style="text-align: center; font-size: 18px;"> Sales: ₹{tr:,.1f} Lakhs</h3>
         </div>
     """, unsafe_allow_html=True)
 
@@ -167,14 +167,6 @@ with col4:
             </div>
     """, unsafe_allow_html=True)
 
-# # Card 5 (DRR Units)
-# with col5:
-#     st.markdown(f"""
-#         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-#             <h3 style="text-align: center; font-size: 18px;">DRR (Units): {drr_units:,.0f}</h3>
-#         </div>
-#     """, unsafe_allow_html=True)
-
 with col5:
     # Check if ut% is positive or negative and set the appropriate arrow
     if ut >= 0:
@@ -195,16 +187,6 @@ with col5:
               </h3>  
             </div>
     """, unsafe_allow_html=True)
-
-
-
-# # Card 6 (AOV)
-# with col6:
-#     st.markdown(f"""
-#         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-#             <h3 style="text-align: center; font-size: 18px;">AOV: ₹{aov:,.0f}</h3>
-#         </div>
-#     """, unsafe_allow_html=True)
 
 with col6:
     # Check if ut% is positive or negative and set the appropriate arrow
