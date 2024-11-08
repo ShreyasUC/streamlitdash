@@ -102,7 +102,7 @@ last_month_revenue = last_month_df['revenue'].sum()
 lmr_lakhs = last_month_revenue/100000
 last_month_units = last_month_df['qty'].sum()
 #last_month_asp = round(last_month_revenue/last_month_units)
-last_month_aov = round(last_month_revenue/lm_orders)
+# last_month_aov = round(last_month_revenue/lm_orders)
 divisor = last_day_last_month.day
 lm_rev_drr = last_month_revenue/divisor/100000
 lm_units_drr = round(last_month_units/divisor)
@@ -241,7 +241,7 @@ with col22:
     st.write(f"DRR (Units) : {lm_units_drr}")
     
 with col23:
-    st.write(f"AOV : ₹{last_month_aov}")
+    st.write(f"AOV : ")
 
 
 #Filtering with date
