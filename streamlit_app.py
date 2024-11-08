@@ -175,7 +175,7 @@ with col4:
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">
-                DRR (Sales) : ₹{drr_gmv:,.0f} Lakhs<br>
+                DRR (Sales) : ₹{drr_gmv:,.1f} Lakhs<br>
             <span style="font-size: 16px; color: {arrow_color};">
                     {arrow} {abs(rt):.2f}%
                 </span>
@@ -239,7 +239,7 @@ col11, col12, col13 = st.columns(3)
 
 # Display different elements in each column
 with col11:
-    st.write(f"Sales : ₹{lmr_lakhs:,.0f} Lakhs")
+    st.write(f"Sales : ₹{lmr_lakhs:,.1f} Lakhs")
     
 with col12:
     st.write(f"Units : {last_month_units}")
@@ -251,7 +251,7 @@ col21, col22, col23 = st.columns(3)
 
 # Display different elements in each column
 with col21:
-    st.write(f"DRR (Sales) : ₹{lm_rev_drr:,.0f} Lakhs")
+    st.write(f"DRR (Sales) : ₹{lm_rev_drr:,.1f} Lakhs")
     
 with col22:
     st.write(f"DRR (Units) : {lm_units_drr}")
