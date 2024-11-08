@@ -95,24 +95,30 @@ aov = total_revenue / distinct_orders if distinct_orders > 0 else 0
 
 #Calculating data for trend
 
-min_order_date = filtered_df['order-date'].min()
+min_order_date = filtered_df['order-date'].min() 
 first_day_current_month = min_order_date.replace(day=1)
 last_day_last_month = first_day_current_month - timedelta(days=1)
 first_day_last_month = last_day_last_month.replace(day=1)
 last_month_df = df[(df['order-date'] >= first_day_last_month) & 
                              (df['order-date'] <= last_day_last_month)]
+lm_orders = last_month_df['order-no'].nunique()
 last_month_revenue = last_month_df['revenue'].sum()
+last_month_units = last_month_df['units'].sum()
+last_month_asp = round(last_month_revenue/last_month_units)
+last_month_aov = last_month_revenue/lm_orders
 divisor = last_day_last_month.day
 lm_rev_drr = last_month_revenue/divisor/100000
+lm_units_drr = last_month_units/divisor/100000
 revenue_trend = drr_gmv - lm_rev_drr
 rt = revenue_trend/lm_rev_drr*100
 
 # Display the last month's revenue
-st.write(f"Revenue for Last Month: ₹{last_month_revenue:,.0f}")
-st.write(f"divisor :{divisor}")
-st.write(f"LM DRR :{lm_rev_drr}")
-st.write(f"FD :{first_day_last_month}")
-st.write(f"LD :{last_day_last_month}")
+st.subheader('Last Month :')
+st.write(f"Sales: ₹{last_month_revenue:,.0f} Lakhs")
+st.write(f"Revenue DRR: ₹{lm_rev_drr:,.0f} Lakhs")
+st.write(f"Units DRR :{first_day_last_month}")
+st.write(f"ASP :{last_month_asp}")
+st.write(f"AOV :{last_month_aov}")
 
 
 # Displaying the data in a card-like format using st.markdown
