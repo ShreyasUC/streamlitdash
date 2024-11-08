@@ -186,7 +186,7 @@ st.write(f" ")
 st.subheader('Last Month :')
 st.write(f"Sales: ₹{last_month_revenue:,.0f} Lakhs")
 st.write(f"Revenue DRR: ₹{lm_rev_drr:,.0f} Lakhs")
-st.write(f"Units DRR :{last_month_units}")
+st.write(f"Units DRR :{lm_units_drr}")
 #st.write(f"ASP :{last_month_asp}")
 st.write(f"AOV :{last_month_aov}")
 
