@@ -134,11 +134,11 @@ last_month_asp = round(last_month_revenue/last_month_units if last_month_units >
 last_month_aov = round(last_month_revenue/lm_orders if lm_orders > 0 else 0)
 divisor = last_day_last_month.day
 lm_rev_drr = last_month_revenue/divisor/100000
-lm_units_drr = round(last_month_units/divisor)
+lm_units_drr = round(last_month_units/divisor if divisor > 0 else 0)
 revenue_trend = drr_gmv - lm_rev_drr
 rt = revenue_trend/lm_rev_drr*100
-ut = ((drr_units-lm_units_drr)/lm_units_drr)*100
-aovt = ((aov-last_month_aov)/lm_units_drr)*100
+ut = ((drr_units-lm_units_drr)/lm_units_drr if lm_units_drr > 0 else 0)*100
+aovt = ((aov-last_month_aov)/lm_units_drr if lm_units_drr > 0 else 0)*100
 
 # Displaying the data in a card-like format using st.markdown
 
