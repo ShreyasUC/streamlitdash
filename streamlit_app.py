@@ -73,14 +73,6 @@ filtered_df = filtered_df[(filtered_df['order-date'] >= pd.to_datetime(start_dat
 # Show the filtered data
 st.subheader(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
 
-#Filtering with date
-aggregated_df = filtered_df.groupby('order-date')[['revenue', 'qty']].sum().reset_index()
-aggregated_df['order-date'] = aggregated_df['order-date'].dt.date  # This will convert to just the date part
-
-st.write(aggregated_df)
-
-# st.write(filtered_df)
-
 # --- Display Total Revenue and Units (Card Style) ---
 
 total_revenue = filtered_df['revenue'].sum()
@@ -192,6 +184,16 @@ with col6:
             <h3 style="text-align: center; font-size: 18px;">AOV: ₹{aov:,.0f}</h3>
         </div>
     """, unsafe_allow_html=True)
+
+
+#Filtering with date
+aggregated_df = filtered_df.groupby('order-date')[['revenue', 'qty']].sum().reset_index()
+aggregated_df['order-date'] = aggregated_df['order-date'].dt.date  # This will convert to just the date part
+
+st.write(aggregated_df)
+
+# st.write(filtered_df)
+
 
 # st.markdown(f"""
 #     <div style="padding: 10px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
