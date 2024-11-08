@@ -105,7 +105,7 @@ last_month_units = last_month_df['qty'].sum()
 last_month_aov = last_month_revenue/lm_orders
 divisor = last_day_last_month.day
 lm_rev_drr = last_month_revenue/divisor/100000
-lm_units_drr = last_month_units/divisor/100000
+lm_units_drr = last_month_units/divisor
 revenue_trend = drr_gmv - lm_rev_drr
 rt = revenue_trend/lm_rev_drr*100
 
