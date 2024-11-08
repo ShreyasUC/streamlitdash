@@ -37,44 +37,6 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 #st.sidebar.header("⚙️ Settings")
 
-st.markdown("""
-    <style>
-        /* Multiselect widget background */
-        .stMultiSelect {
-            background-color: #008080;  /* Teal background color */
-            color: white;                /* White text color */
-            border-radius: 8px;          /* Rounded corners */
-            border: 1px solid #006666;   /* Darker teal border */
-        }
-
-        /* Text color of selected items */
-        .stMultiSelect .selectbox__input {
-            color: white;                /* Text color inside the multiselect box */
-        }
-
-        /* Placeholder text */
-        .stMultiSelect .selectbox__placeholder {
-            color: #b2dfdb;              /* Lighter teal for placeholder */
-        }
-
-        /* Change the color of the checkboxes */
-        .stMultiSelect .checkbox {
-            color: #004d4d;              /* Dark teal color for checkboxes */
-        }
-
-        /* Dropdown background color */
-        .stMultiSelect .st-bx {
-            background-color: #004d4d;   /* Darker teal for the dropdown */
-            color: white;                /* White text for dropdown items */
-        }
-
-        /* Hover effect for dropdown items */
-        .stMultiSelect .st-bx > div:hover {
-            background-color: #007f7f;   /* Slightly lighter teal on hover */
-        }
-    </style>
-""", unsafe_allow_html=True)
-
 
 # # Sidebar for selecting filters
 # st.sidebar.header('Filter Data')
