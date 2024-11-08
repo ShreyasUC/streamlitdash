@@ -57,7 +57,7 @@ platform_filter = st.sidebar.selectbox('Select Platform', ['All'] + list(df['pla
 filtered_df = df.copy()  # Start with the full dataset
 
 if 'All' in category_filter:
-    filtered_df = df  # Show all data if 'All' is selected
+    filtered_df = filtered_df  # Show all data if 'All' is selected
 else:
     filtered_df = filtered_df[filtered_df['category'].isin(category_filter)]
 
@@ -105,9 +105,15 @@ first_day_last_month = last_day_last_month.replace(day=1)
 
 fdf = df.copy()
 
-# Filter by Category
-if category_filter != 'All':
-    fdf = fdf[fdf['category'] == category_filter]
+if 'All' in category_filter:
+    fdf = fdf  # Show all data if 'All' is selected
+else:
+    fdf = fdf[filtered_df['category'].isin(category_filter)]
+
+
+# # Filter by Category
+# if category_filter != 'All':
+#     fdf = fdf[fdf['category'] == category_filter]
 
 # Filter by Customer Zone
 if zone_filter != 'All':
