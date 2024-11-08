@@ -6,8 +6,22 @@ import plotly.express as px
 from pathlib import Path
 from datetime import datetime, timedelta
 
+
+
 # Set page config
 st.set_page_config(page_title="Uppercase Business Dashboard", page_icon = "uppercase-logo.png", layout="wide")
+
+st.markdown(
+    """
+    <meta property="og:title" content="Uppercase" />
+    <meta property="og:description" content="Access to the Business Dashboard" />
+    <meta property="og:image" content="uppercase-logo.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://acefourdash.streamlit.app/" />
+    """,
+    unsafe_allow_html=True
+)
+
 
 # Load the dataset
 DATA_FILENAME = Path(__file__).parent / 'data/base.csv'
