@@ -71,7 +71,7 @@ filtered_df = filtered_df[(filtered_df['order-date'] >= pd.to_datetime(start_dat
                           (filtered_df['order-date'] <= pd.to_datetime(end_date))]
 
 # Show the filtered data
-st.subheader(f'KPI's')
+st.subheader(f"KPI's")
 st.write(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Platform - {platform_filter}')
 
 # --- Display Total Revenue and Units (Card Style) ---
