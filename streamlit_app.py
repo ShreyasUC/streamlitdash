@@ -103,7 +103,7 @@ last_month_df = df[(df['order-date'] >= first_day_last_month) &
                              (df['order-date'] <= last_day_last_month)]
 lm_orders = last_month_df['order-no'].nunique()
 last_month_revenue = last_month_df['revenue'].sum()
-last_month_units = last_month_df['units'].sum()
+last_month_units = last_month_df['qty'].sum()
 last_month_asp = round(last_month_revenue/last_month_units)
 last_month_aov = last_month_revenue/lm_orders
 divisor = last_day_last_month.day
