@@ -95,8 +95,24 @@ min_order_date = filtered_df['order-date'].min()
 first_day_current_month = min_order_date.replace(day=1)
 last_day_last_month = first_day_current_month - timedelta(days=1)
 first_day_last_month = last_day_last_month.replace(day=1)
-last_month_df = filtered_df[(filtered_df['order-date'] >= first_day_last_month) & 
-                             (filtered_df['order-date'] <= last_day_last_month)]
+
+fdf = df.copy()
+
+# Filter by Category
+if category_filter != 'All':
+    fdf = fdf[fdf['category'] == category_filter]
+
+# Filter by Customer Zone
+if zone_filter != 'All':
+    fdf = fdf[fdf['cust-zone'] == zone_filter]
+
+# Filter by Platform
+if platform_filter != 'All':
+    fdf = fdf[fdf['platform'] == platform_filter]
+
+
+last_month_df = fdf[(fdf['order-date'] >= first_day_last_month) & 
+                             (fdf['order-date'] <= last_day_last_month)]
 lm_orders = last_month_df['order-no'].nunique()
 last_month_revenue = last_month_df['revenue'].sum()
 lmr_lakhs = last_month_revenue/100000
