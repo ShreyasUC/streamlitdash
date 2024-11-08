@@ -301,6 +301,7 @@ with col23:
     st.write(f"AOV : ₹{last_month_aov}")
 
 st.write(f" ")
+st.write(f" ")
 #Filtering with date
 aggregated_df = filtered_df.groupby('order-date')[['revenue', 'qty']].sum().reset_index()
 aggregated_df['order-date'] = aggregated_df['order-date'].dt.date  # This will convert to just the date part
