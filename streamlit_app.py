@@ -108,7 +108,7 @@ fdf = df.copy()
 if 'All' in category_filter:
     fdf = fdf  # Show all data if 'All' is selected
 else:
-    fdf = fdf[filtered_df['category'].isin(category_filter)]
+    fdf = fdf[fdf['category'].isin(category_filter)]
 
 
 # # Filter by Category
