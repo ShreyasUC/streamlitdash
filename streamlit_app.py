@@ -209,15 +209,39 @@ with col6:
             </div>
     """, unsafe_allow_html=True)
 
-
 # Display the last month's revenue
 st.write(f" ")
 st.subheader('Last Month :')
-st.write(f"Sales: ₹{lmr_lakhs:,.0f} Lakhs")
-st.write(f"Revenue DRR: ₹{lm_rev_drr:,.0f} Lakhs")
-st.write(f"Units DRR :{lm_units_drr}")
-#st.write(f"ASP :{last_month_asp}")
-st.write(f"AOV :{last_month_aov}")
+# st.write(f"Sales: ₹{lmr_lakhs:,.0f} Lakhs")
+# st.write(f"Revenue DRR: ₹{lm_rev_drr:,.0f} Lakhs")
+# st.write(f"Units DRR :{lm_units_drr}")
+# st.write(f"ASP :{last_month_asp}")
+# st.write(f"AOV :{last_month_aov}")
+
+
+col11, col12, col13 = st.columns(3)
+
+# Display different elements in each column
+with col11:
+    st.write(f"Sales: ₹{lmr_lakhs:,.0f} Lakhs")
+    
+with col12:
+    st.write(f"Units:{last_month_units}")
+    
+with col13:
+    st.write(f"ASP:{last_month_asp}")
+
+col21, col22, col23 = st.columns(3)
+
+# Display different elements in each column
+with col21:
+    st.write(f"Revenue DRR: ₹{lm_rev_drr:,.0f} Lakhs")
+    
+with col22:
+    st.write(f"Units DRR:{lm_units_drr}")
+    
+with col23:
+    st.write(f"AOV:{last_month_aov}")
 
 
 #Filtering with date
