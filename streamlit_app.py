@@ -103,14 +103,14 @@ last_month_df = df[(df['order-date'] >= first_day_last_month) &
                              (df['order-date'] <= last_day_last_month)]
 last_month_revenue = last_month_df['revenue'].sum()
 divisor = last_day_last_month.day
-lm_rev_drr = last_month_revenue/divisor
+lm_rev_drr = last_month_revenue/divisor/100000
 revenue_trend = drr_gmv - lm_rev_drr
 rt = revenue_trend/lm_rev_drr*100
 
 # Display the last month's revenue
 st.write(f"Revenue for Last Month: ₹{last_month_revenue:,.0f}")
 st.write(f"divisor :{divisor}")
-st.write(f"DRR Trend: ₹{rt:,.1f}")
+st.write(f"LM DRR :{lm_rev_drr}")
 st.write(f"FD :{first_day_last_month}")
 st.write(f"LD :{last_day_last_month}")
 
