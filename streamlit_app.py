@@ -48,7 +48,7 @@ end_date = st.sidebar.date_input("End Date", df['order-date'].max())
 
 # Add an "All" option for filters in the sidebar
 #category_filter = st.sidebar.selectbox('Select Category', ['All'] + list(df['category'].unique()))
-category_filter = st.multiselect('Select Category', ['All'] + list(df['category'].unique()), default=['All'])
+category_filter = st.sidebar.multiselect('Select Category', ['All'] + list(df['category'].unique()), default=['All'])
 
 zone_filter = st.sidebar.selectbox('Select Customer Zone', ['All'] + list(df['cust-zone'].unique()))
 platform_filter = st.sidebar.selectbox('Select Platform', ['All'] + list(df['platform'].unique()))
@@ -56,9 +56,14 @@ platform_filter = st.sidebar.selectbox('Select Platform', ['All'] + list(df['pla
 # Apply filters to the DataFrame based on selected options
 filtered_df = df.copy()  # Start with the full dataset
 
-# Filter by Category
-if category_filter != 'All':
-    filtered_df = filtered_df[filtered_df['category'] == category_filter]
+if 'All' in category_filter:
+    filtered_df = df  # Show all data if 'All' is selected
+else:
+    filtered_df = filtered_df[filtered_df['category'].isin(category_filter)]
+
+# # Filter by Category
+# if category_filter != 'All':
+#     filtered_df = filtered_df[filtered_df['category'] == category_filter]
 
 # Filter by Customer Zone
 if zone_filter != 'All':
