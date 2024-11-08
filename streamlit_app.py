@@ -105,9 +105,11 @@ last_month_units = last_month_df['qty'].sum()
 last_month_aov = last_month_revenue/lm_orders
 divisor = last_day_last_month.day
 lm_rev_drr = last_month_revenue/divisor/100000
-lm_units_drr = last_month_units/divisor
+lm_units_drr = round(last_month_units/divisor)
 revenue_trend = drr_gmv - lm_rev_drr
 rt = revenue_trend/lm_rev_drr*100
+ut = ((drr_units-lm_units_drr)/lm_units_drr)*100
+aovt = ((aov-last_month_aov)/lm_units_drr)*100
 
 # Displaying the data in a card-like format using st.markdown
 
@@ -157,7 +159,7 @@ with col4:
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
             <h3 style="text-align: center; font-size: 18px;">
-                DRR (GMV): ₹{drr_gmv:,.0f} Lakhs<br>
+                DRR (Sales): ₹{drr_gmv:,.0f} Lakhs<br>
             <span style="font-size: 16px; color: {arrow_color};">
                     {arrow} {abs(rt):.2f}%
                 </span>
@@ -165,20 +167,64 @@ with col4:
             </div>
     """, unsafe_allow_html=True)
 
-# Card 5 (DRR Units)
+# # Card 5 (DRR Units)
+# with col5:
+#     st.markdown(f"""
+#         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+#             <h3 style="text-align: center; font-size: 18px;">DRR (Units): {drr_units:,.0f}</h3>
+#         </div>
+#     """, unsafe_allow_html=True)
+
 with col5:
+    # Check if ut% is positive or negative and set the appropriate arrow
+    if ut >= 0:
+        arrow = "&#x2191;"  # Up arrow (↑)
+        arrow_color = "green"  # Green color for positive values
+    else:
+        arrow = "&#x2193;"  # Down arrow (↓)
+        arrow_color = "red"  # Red color for negative values
+
+    # Display DRR (GMV) with rt% and the corresponding arrow
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <h3 style="text-align: center; font-size: 18px;">DRR (Units): {drr_units:,.0f}</h3>
-        </div>
+            <h3 style="text-align: center; font-size: 18px;">
+                DRR (Units): ₹{drr_units:,.0f}<br>
+            <span style="font-size: 16px; color: {arrow_color};">
+                    {arrow} {abs(ut):.2f}%
+                </span>
+              </h3>  
+            </div>
     """, unsafe_allow_html=True)
 
-# Card 6 (AOV)
+
+
+# # Card 6 (AOV)
+# with col6:
+#     st.markdown(f"""
+#         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+#             <h3 style="text-align: center; font-size: 18px;">AOV: ₹{aov:,.0f}</h3>
+#         </div>
+#     """, unsafe_allow_html=True)
+
 with col6:
+    # Check if ut% is positive or negative and set the appropriate arrow
+    if aovt >= 0:
+        arrow = "&#x2191;"  # Up arrow (↑)
+        arrow_color = "green"  # Green color for positive values
+    else:
+        arrow = "&#x2193;"  # Down arrow (↓)
+        arrow_color = "red"  # Red color for negative values
+
+    # Display AOV with aovt% and the corresponding arrow
     st.markdown(f"""
         <div style="padding: 15px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <h3 style="text-align: center; font-size: 18px;">AOV: ₹{aov:,.0f}</h3>
-        </div>
+            <h3 style="text-align: center; font-size: 18px;">
+                AOV: ₹{aov:,.0f}<br>
+            <span style="font-size: 16px; color: {arrow_color};">
+                    {arrow} {abs(aovt):.2f}%
+                </span>
+              </h3>  
+            </div>
     """, unsafe_allow_html=True)
 
 
