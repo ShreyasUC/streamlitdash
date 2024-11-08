@@ -103,7 +103,7 @@ last_month_df = df[(df['order-date'] >= first_day_last_month) &
                              (df['order-date'] <= last_day_last_month)]
 last_month_revenue = last_month_df['revenue'].sum()
 divisor = last_day_last_month.day
-lm_rev_drr = last_month_revenue/divisor/100000
+lm_rev_drr = last_month_revenue/divisor
 revenue_trend = drr_gmv - lm_rev_drr
 rt = revenue_trend/lm_rev_drr*100
 
