@@ -99,6 +99,7 @@ last_month_df = df[(df['order-date'] >= first_day_last_month) &
                              (df['order-date'] <= last_day_last_month)]
 lm_orders = last_month_df['order-no'].nunique()
 last_month_revenue = last_month_df['revenue'].sum()
+lmr_lakhs = last_month_revenue/100000
 last_month_units = last_month_df['qty'].sum()
 #last_month_asp = round(last_month_revenue/last_month_units)
 last_month_aov = last_month_revenue/lm_orders
@@ -184,7 +185,7 @@ with col6:
 # Display the last month's revenue
 st.write(f" ")
 st.subheader('Last Month :')
-st.write(f"Sales: ₹{last_month_revenue:,.0f} Lakhs")
+st.write(f"Sales: ₹{lmr_lakhs:,.0f} Lakhs")
 st.write(f"Revenue DRR: ₹{lm_rev_drr:,.0f} Lakhs")
 st.write(f"Units DRR :{lm_units_drr}")
 #st.write(f"ASP :{last_month_asp}")
