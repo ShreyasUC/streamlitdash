@@ -307,7 +307,7 @@ aggregated_df = filtered_df.groupby('order-date')[['revenue', 'qty']].sum().rese
 aggregated_df['order-date'] = aggregated_df['order-date'].dt.date  # This will convert to just the date part
 aggregated_df['ASP'] = round(aggregated_df['revenue']/aggregated_df['qty'])
 aggregated_df = aggregated_df.sort_values(by='order-date', ascending=False)
-st.write(f"Day on day trend")
+st.subheader(f"Day on day trend")
 st.write(aggregated_df,index=False)
 
 # # --- Revenue by Category (Bar Chart) ---
