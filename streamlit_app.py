@@ -229,7 +229,7 @@ with col12:
     st.write(f"Units : {last_month_units}")
     
 with col13:
-    st.write(f"ASP : ")
+    st.write(f"ASP : ₹{last_month_asp}")
 
 col21, col22, col23 = st.columns(3)
 
@@ -241,7 +241,7 @@ with col22:
     st.write(f"DRR (Units) : {lm_units_drr}")
     
 with col23:
-    st.write(f"AOV : ")
+    st.write(f"AOV : ₹{last_month_aov}")
 
 
 #Filtering with date
