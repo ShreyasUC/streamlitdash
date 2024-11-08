@@ -56,27 +56,31 @@ platform_filter = st.sidebar.selectbox('Select Platform', ['All'] + list(df['pla
 # Apply filters to the DataFrame based on selected options
 filtered_df = df.copy()  # Start with the full dataset
 
-# filtered_df = filtered_df[filtered_df['Category'].isin(category_filter)]
-
+#Filter by Category
 if 'All' in category_filter:
     filtered_df = filtered_df  # Show all data if 'All' is selected
 else:
     filtered_df = filtered_df[filtered_df['category'].isin(category_filter)]
 
-# # Filter by Category
-# if category_filter != 'All':
-#     # filtered_df = filtered_df[filtered_df['category'] == category_filter]
-#     filtered_df = filtered_df[filtered_df['Category'].isin(category_filter)]
-
-
 
 # Filter by Customer Zone
-if zone_filter != 'All':
-    filtered_df = filtered_df[filtered_df['cust-zone'] == zone_filter]
+if 'All' in zone_filter:
+    filtered_df = filtered_df  # Show all data if 'All' is selected
+else:
+    filtered_df = filtered_df[filtered_df['cust-zone'].isin(zone_filter)]
+
+
+# if zone_filter != 'All':
+#     filtered_df = filtered_df[filtered_df['cust-zone'] == zone_filter]
 
 # Filter by Platform
-if platform_filter != 'All':
-    filtered_df = filtered_df[filtered_df['platform'] == platform_filter]
+if 'All' in platform_filter:
+    filtered_df = filtered_df  # Show all data if 'All' is selected
+else:
+    filtered_df = filtered_df[filtered_df['platform'].isin(platform_filter)]
+
+# if platform_filter != 'All':
+#     filtered_df = filtered_df[filtered_df['platform'] == platform_filter]
 
 # Filter by Date Range
 filtered_df = filtered_df[(filtered_df['order-date'] >= pd.to_datetime(start_date)) & 
@@ -115,22 +119,28 @@ if 'All' in category_filter:
 else:
     fdf = fdf[fdf['category'].isin(category_filter)]
 
-# fdf = fdf[fdf['Category'].isin(category_filter)]
+# # Filter by Customer Zone
+# if zone_filter != 'All':
+#     fdf = fdf[fdf['cust-zone'] == zone_filter]
 
-
-# # Filter by Category
-# if category_filter != 'All':
-#     # fdf = fdf[fdf['category'] == category_filter]
-#     fdf = fdf[fdf['Category'].isin(category_filter)]
+# # Filter by Platform
+# if platform_filter != 'All':
+#     fdf = fdf[fdf['platform'] == platform_filter]
 
 
 # Filter by Customer Zone
-if zone_filter != 'All':
-    fdf = fdf[fdf['cust-zone'] == zone_filter]
+if 'All' in zone_filter:
+    fdf = fdf  # Show all data if 'All' is selected
+else:
+    fdf = fdf[fdf['cust-zone'].isin(zone_filter)]
+
 
 # Filter by Platform
-if platform_filter != 'All':
-    fdf = fdf[fdf['platform'] == platform_filter]
+if 'All' in platform_filter:
+    fdf = fdf  # Show all data if 'All' is selected
+else:
+    fdf = fdf[fdf['platform'].isin(platform_filter)]
+
 
 
 last_month_df = fdf[(fdf['order-date'] >= first_day_last_month) & 
