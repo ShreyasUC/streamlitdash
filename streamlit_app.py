@@ -300,26 +300,13 @@ with col22:
 with col23:
     st.write(f"AOV : ₹{last_month_aov}")
 
-
+st.write(f" ")
 #Filtering with date
 aggregated_df = filtered_df.groupby('order-date')[['revenue', 'qty']].sum().reset_index()
 aggregated_df['order-date'] = aggregated_df['order-date'].dt.date  # This will convert to just the date part
+aggregated_df['ASP'] = aggregated_df['revenue']/aggregated_df['qty']
 
 st.write(aggregated_df)
-
-# st.write(filtered_df)
-
-
-# st.markdown(f"""
-#     <div style="padding: 10px; background-color: #f1f1f1; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-#         <h3>GMV : {tr:,.0f} lakhs</h3>
-#         <h3>Units: {total_units:,.0f}</h3>
-#         <h3>ASP : {asp:,}</h3>
-#         <h3> DRR (GMV) : {drr_gmv:,.0f}</h3>
-#         <h3> DRR (Units) : {drr_units:,.0f}</h3>
-#         <h3> AOV : {aov:,.0f}</h3>
-#     </div>
-#     """, unsafe_allow_html=True)
 
 # # --- Revenue by Category (Bar Chart) ---
 # st.subheader('Revenue by Category')
@@ -334,6 +321,14 @@ st.write(aggregated_df)
 # plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
 
 # st.pyplot(fig)
+
+# --- Revenue by Platform (Interactive Bar Chart) ---
+st.subheader('Revenue by Platform')
+platform_revenue = filtered_df.groupby('platform')['revenue'].sum().reset_index()
+
+fig = px.bar(platform_revenue, x='platform', y='revenue', title='Revenue by Platform', color='platform')
+st.plotly_chart(fig)
+
 
 # --- Revenue Split by Category (Pie Chart) ---
 st.subheader('Revenue Split by Category (Pie Chart)')
@@ -356,23 +351,16 @@ plt.xticks(rotation=45)
 
 st.pyplot(fig)
 
-# --- Revenue Distribution by Customer Zone (Boxplot) ---
-st.subheader('Revenue Distribution by Customer Zone')
-plt.figure(figsize=(10, 6))
-sns.boxplot(x='cust-zone', y='revenue', data=filtered_df, palette='Set2')
-plt.title('Revenue Distribution by Customer Zone')
-plt.xlabel('Customer Zone')
-plt.ylabel('Revenue')
-plt.xticks(rotation=45)
+# # --- Revenue Distribution by Customer Zone (Boxplot) ---
+# st.subheader('Revenue Distribution by Customer Zone')
+# plt.figure(figsize=(10, 6))
+# sns.boxplot(x='cust-zone', y='revenue', data=filtered_df, palette='Set2')
+# plt.title('Revenue Distribution by Customer Zone')
+# plt.xlabel('Customer Zone')
+# plt.ylabel('Revenue')
+# plt.xticks(rotation=45)
 
-st.pyplot(plt)
-
-# --- Revenue by Platform (Interactive Bar Chart) ---
-st.subheader('Revenue by Platform (Interactive)')
-platform_revenue = filtered_df.groupby('platform')['revenue'].sum().reset_index()
-
-fig = px.bar(platform_revenue, x='platform', y='revenue', title='Revenue by Platform', color='platform')
-st.plotly_chart(fig)
+# st.pyplot(plt)
 
 # Optionally, you can add more graphs based on user input, such as:
 # Create Revenue by SKU, Quantity Sold, or more visualizations.
