@@ -182,6 +182,7 @@ with col6:
 
 
 # Display the last month's revenue
+st.write(f" ")
 st.subheader('Last Month :')
 st.write(f"Sales: ₹{last_month_revenue:,.0f} Lakhs")
 st.write(f"Revenue DRR: ₹{lm_rev_drr:,.0f} Lakhs")
