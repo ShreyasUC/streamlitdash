@@ -111,6 +111,9 @@ rt = revenue_trend/lm_rev_drr*100
 st.write(f"Revenue for Last Month: ₹{last_month_revenue:,.0f}")
 st.write(f"divisor :{divisor}")
 st.write(f"DRR Trend: ₹{rt:,.1f}")
+st.write(f"FD :{first_day_last_month}")
+st.write(f"LD :{last_day_last_month}")
+
 
 # Displaying the data in a card-like format using st.markdown
 
