@@ -44,11 +44,6 @@ st.markdown("""
             color: #008080;              /* Teal color for the dropdown items */
         }
 
-        /* Hover effect for dropdown items */
-        .stMultiSelect .st-bx > div:hover {
-            background-color: #007f7f;   /* Slightly lighter teal on hover */
-            color: white;                /* White text color on hover */
-        }
     </style>
 """, unsafe_allow_html=True)
 
