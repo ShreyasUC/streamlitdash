@@ -87,7 +87,7 @@ st.write(f'Selected Data: Category - {category_filter}, Zone - {zone_filter}, Pl
 total_revenue = filtered_df['revenue'].sum()
 tr = total_revenue/100000
 total_units = filtered_df['qty'].sum()
-asp = round(total_revenue/total_units)
+asp = round(total_revenue/total_units if total_units > 0 else 0)
 distinct_order_dates = filtered_df['order-date'].nunique()
 distinct_orders = filtered_df['order-no'].nunique()
 drr_gmv = tr / distinct_order_dates if distinct_order_dates > 0 else 0
