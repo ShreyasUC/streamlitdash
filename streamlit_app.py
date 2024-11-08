@@ -56,17 +56,20 @@ platform_filter = st.sidebar.selectbox('Select Platform', ['All'] + list(df['pla
 # Apply filters to the DataFrame based on selected options
 filtered_df = df.copy()  # Start with the full dataset
 
-if 'All' not in category_filter:
-    filtered_df = filtered_df[filtered_df['Category'].isin(category_filter)]
+# if 'All' not in category_filter:
+#     filtered_df = filtered_df[filtered_df['Category'].isin(category_filter)]
 
 # if 'All' in category_filter:
 #     filtered_df = filtered_df  # Show all data if 'All' is selected
 # else:
 #     filtered_df = filtered_df[filtered_df['category'].isin(category_filter)]
 
-# # Filter by Category
-# if category_filter != 'All':
-#     filtered_df = filtered_df[filtered_df['category'] == category_filter]
+# Filter by Category
+if category_filter != 'All':
+    # filtered_df = filtered_df[filtered_df['category'] == category_filter]
+    filtered_df = filtered_df[filtered_df['Category'].isin(category_filter)]
+
+
 
 # Filter by Customer Zone
 if zone_filter != 'All':
@@ -113,13 +116,15 @@ fdf = df.copy()
 # else:
 #     fdf = fdf[fdf['category'].isin(category_filter)]
 
-if 'All' not in category_filter:
+# if 'All' not in category_filter:
+#     fdf = fdf[fdf['Category'].isin(category_filter)]
+
+
+# Filter by Category
+if category_filter != 'All':
+    # fdf = fdf[fdf['category'] == category_filter]
     fdf = fdf[fdf['Category'].isin(category_filter)]
 
-
-# # Filter by Category
-# if category_filter != 'All':
-#     fdf = fdf[fdf['category'] == category_filter]
 
 # Filter by Customer Zone
 if zone_filter != 'All':
