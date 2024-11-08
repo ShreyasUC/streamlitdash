@@ -305,11 +305,10 @@ st.write(f" ")
 aggregated_df = filtered_df.groupby('order-date')[['revenue', 'qty']].sum().reset_index()
 aggregated_df['order-date'] = aggregated_df['order-date'].dt.date  # This will convert to just the date part
 aggregated_df['ASP'] = round(aggregated_df['revenue']/aggregated_df['qty'])
-aggregated_df = aggregated_df.reset_index(drop=True)
 aggregated_df = aggregated_df.sort_values(by='order-date', ascending=False)
 
 
-st.write(aggregated_df)
+st.write(aggregated_df(index=False))
 
 # # --- Revenue by Category (Bar Chart) ---
 # st.subheader('Revenue by Category')
@@ -326,32 +325,27 @@ st.write(aggregated_df)
 # st.pyplot(fig)
 
 # --- Revenue by Platform (Interactive Bar Chart) ---
-st.subheader('Revenue by Platform')
+#st.subheader('Revenue by Platform')
 platform_revenue = filtered_df.groupby('platform')['revenue'].sum().reset_index()
-
 fig = px.bar(platform_revenue, x='platform', y='revenue', title='Revenue by Platform', color='platform')
 st.plotly_chart(fig)
 
 
 # --- Revenue Split by Category (Pie Chart) ---
-st.subheader('Revenue Split by Category (Pie Chart)')
+#st.subheader('Revenue Split by Category (Pie Chart)')
 category_revenue_pie = filtered_df.groupby('category')['revenue'].sum().reset_index()
-
-# Pie chart using Plotly
 fig = px.pie(category_revenue_pie, names='category', values='revenue', title='Revenue Split by Category')
 st.plotly_chart(fig)
 
 # --- Revenue Over Time (Line Chart) ---
-st.subheader('Revenue Over Time (Order Date)')
+st.subheader('Revenue Over Time')
 time_revenue = filtered_df.groupby('order-date')['revenue'].sum().reset_index()
-
 fig, ax = plt.subplots(figsize=(10, 6))
 ax.plot(time_revenue['order-date'], time_revenue['revenue'], marker='o', color='green')
 ax.set_title('Revenue Over Time')
 ax.set_xlabel('Order Date')
 ax.set_ylabel('Revenue')
 plt.xticks(rotation=45)
-
 st.pyplot(fig)
 
 # # --- Revenue Distribution by Customer Zone (Boxplot) ---
