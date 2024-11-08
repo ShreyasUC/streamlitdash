@@ -50,8 +50,8 @@ end_date = st.sidebar.date_input("End Date", df['order-date'].max())
 #category_filter = st.sidebar.selectbox('Select Category', ['All'] + list(df['category'].unique()))
 category_filter = st.sidebar.multiselect('Select Category', ['All'] + list(df['category'].unique()), default=['All'])
 
-zone_filter = st.sidebar.selectbox('Select Customer Zone', ['All'] + list(df['cust-zone'].unique()))
-platform_filter = st.sidebar.selectbox('Select Platform', ['All'] + list(df['platform'].unique()))
+zone_filter = st.sidebar.multiselect('Select Customer Zone', ['All'] + list(df['cust-zone'].unique()))
+platform_filter = st.sidebar.multiselect('Select Platform', ['All'] + list(df['platform'].unique()))
 
 # Apply filters to the DataFrame based on selected options
 filtered_df = df.copy()  # Start with the full dataset
